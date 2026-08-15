@@ -6,37 +6,11 @@ import os
 GREEN = (56, 142, 60)    # #388E3C
 GOLD = (212, 175, 55)    # #D4AF37
 WHITE = (255, 255, 255)
+MASTER_ICON = os.path.join(os.path.dirname(__file__), 'icon-master.png')
 
 def make_icon(size, path, maskable=False):
-    img = Image.new('RGBA', (size, size), (0, 0, 0, 0))
-    draw = ImageDraw.Draw(img)
-    
-    if maskable:
-        # Full bleed background for maskable icons
-        draw.rectangle([0, 0, size, size], fill=GREEN)
-        # Text centered with padding for safe zone
-        font_size = int(size * 0.55)
-    else:
-        # Rounded square
-        radius = int(size * 0.22)
-        draw.rounded_rectangle([0, 0, size-1, size-1], radius=radius, fill=GREEN)
-        font_size = int(size * 0.55)
-    
-    # Try to use a bold font
-    try:
-        font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", font_size)
-    except:
-        font = ImageFont.load_default()
-    
-    # Draw "PT" text centered
-    text = "PT"
-    bbox = draw.textbbox((0, 0), text, font=font)
-    tw = bbox[2] - bbox[0]
-    th = bbox[3] - bbox[1]
-    x = (size - tw) // 2 - bbox[0]
-    y = (size - th) // 2 - bbox[1] - int(size * 0.03)
-    draw.text((x, y), text, fill=WHITE, font=font)
-    
+    img = Image.open(MASTER_ICON).convert('RGB')
+    img = img.resize((size, size), Image.Resampling.LANCZOS)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     img.save(path, 'PNG')
     print(f"  Generated: {path} ({size}x{size})")
