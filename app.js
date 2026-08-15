@@ -621,9 +621,10 @@ async function uploadFile(file, category) {
 
     if (error) throw error;
 
-    const { data: urlData } = sb.storage.from(STORAGE_BUCKET).getPublicUrl(fileName);
+    const { data: urlData, error: signedUrlError } = await sb.storage.from(STORAGE_BUCKET).createSignedUrl(fileName, 3600);
+    if (signedUrlError || !urlData?.signedUrl) throw signedUrlError || new Error('Unable to create secure media link.');
     showUploadAlert(`${category.charAt(0).toUpperCase() + category.slice(1)} uploaded successfully!`, 'success');
-    addGalleryItem(urlData.publicUrl, category, file.name);
+    addGalleryItem(urlData.signedUrl, category, file.name);
   } catch (error) {
     console.error('Upload error:', error);
     let msg = 'Upload failed. Please try again.';

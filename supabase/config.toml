@@ -1,0 +1,2 @@
+[functions.compliance-operations]
+verify_jwt = false
