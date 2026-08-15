@@ -114,6 +114,9 @@ input, textarea, select {
   transition: background 0.3s;
 }
 
+.app-bar:after { content: ''; width: 40px; height: 40px; flex: 0 0 40px; }
+.app-bar-title { flex: 1; justify-content: center; min-width: 0; }
+
 .app-bar-title {
   font-weight: 700;
   font-size: 1.15rem;
@@ -1174,3 +1177,19 @@ input:checked + .slider::before {
 .biometric-lock-content .auth-btn {
   width: 100%;
 }
+
+/* ===== Settings ===== */
+.settings-heading { margin: 22px 4px 10px; font-size: 0.9rem; font-weight: 700; color: var(--text); }
+.settings-list { padding: 0; overflow: hidden; }
+.settings-row { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px; border: 0; background: transparent; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+.settings-row span { display: flex; align-items: center; gap: 11px; }
+.settings-row span > i, .settings-card h3 i { color: var(--primary-green); }
+.settings-row > i { font-size: 0.8rem; opacity: 0.45; }
+.settings-card h3 { margin: 0 0 16px; font-size: 1rem; }
+.settings-card .auth-btn { margin-bottom: 0; }
+.form-success { min-height: 1em; margin: 8px 0; color: var(--primary-green); font-size: 0.76rem; }
+.settings-account { padding: 4px 16px; }
+.settings-signout { width: 100%; display: flex; align-items: center; gap: 9px; padding: 14px 2px; border: 0; border-bottom: 1px solid var(--border-color); background: transparent; color: var(--primary-red); font: inherit; font-weight: 700; text-align: left; cursor: pointer; }
+.settings-identity { display: flex; flex-direction: column; gap: 2px; padding: 13px 2px 11px; }
+.settings-identity strong { font-size: 0.82rem; }
+.settings-identity span { font-size: 0.72rem; opacity: 0.62; overflow-wrap: anywhere; }

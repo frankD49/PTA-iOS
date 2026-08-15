@@ -22,7 +22,9 @@ if (savedTheme) root.dataset.theme = savedTheme;
 
 function updateThemeIcon() {
   const icon = document.querySelector('#themeToggle i');
+  const label = document.getElementById('themeToggleLabel');
   if (icon) icon.className = root.dataset.theme === 'light' ? 'bi bi-moon' : 'bi bi-sun';
+  if (label) label.textContent = root.dataset.theme === 'light' ? 'Use dark mode' : 'Use light mode';
 }
 updateThemeIcon();
 
@@ -53,6 +55,7 @@ function switchPage(pageId) {
     'page-home': 'Precious Tots Academy',
     'page-programs': 'Programs',
     'page-gallery': 'Gallery',
+    'page-settings': 'Settings',
     'page-contact': 'Contact',
     'page-admin': 'Admin Panel',
   };
@@ -109,10 +112,6 @@ document.querySelectorAll('.sheet-handle').forEach((h) => {
 });
 
 // ===== Auth Sheet Triggers =====
-document.getElementById('loginTrigger').addEventListener('click', async () => {
-  if (sb) await sb.auth.signOut();
-  showAuthLanding('loginPanel');
-});
 document.getElementById('signupTrigger').addEventListener('click', () => showAuthLanding('signupPanel'));
 
 function showAuthLanding(panelId = 'loginPanel') {
@@ -492,17 +491,11 @@ document.getElementById('forgotPasswordForm').addEventListener('submit', async f
 function updateNavigationForLoggedInUser(user) {
   approvedSessionActive = isAdmin(user.email, user) || user.app_metadata?.invite_status === 'approved';
   enforceCurrentAccountStatus();
-  const loginTrigger = document.getElementById('loginTrigger');
-  if (loginTrigger) {
-    const name = (user.user_metadata && (user.user_metadata.first_name || user.user_metadata.full_name)) || user.email.split('@')[0];
-    loginTrigger.innerHTML = `<i class="bi bi-person-check"></i> ${name}`;
-    loginTrigger.onclick = async () => {
-      if (sb) {
-        await sb.auth.signOut();
-        showAuthLanding('loginPanel');
-      }
-    };
-  }
+  const name = (user.user_metadata && (user.user_metadata.full_name || user.user_metadata.first_name)) || user.email.split('@')[0];
+  const settingsName = document.getElementById('settingsUserName');
+  const settingsEmail = document.getElementById('settingsUserEmail');
+  if (settingsName) settingsName.textContent = name;
+  if (settingsEmail) settingsEmail.textContent = user.email || '';
   // Show upload section if logged in
   const uploadSection = document.getElementById('uploadSection');
   if (uploadSection) uploadSection.style.display = isAdmin(user.email, user) ? 'block' : 'none';
@@ -516,6 +509,46 @@ function updateNavigationForLoggedInUser(user) {
 
   if (approvedSessionActive) setTimeout(() => initBiometricIfNeeded(), 100);
 }
+
+document.getElementById('settingsSignOut')?.addEventListener('click', async () => {
+  const button = document.getElementById('settingsSignOut');
+  button.disabled = true;
+  const { error } = await sb.auth.signOut();
+  button.disabled = false;
+  if (error) return alert(`Sign out failed: ${error.message}`);
+  closeMenu();
+  showAuthLanding('loginPanel');
+});
+
+document.getElementById('changePasswordForm')?.addEventListener('submit', async function (event) {
+  event.preventDefault();
+  const currentPassword = document.getElementById('currentPassword').value;
+  const newPassword = document.getElementById('newPassword').value;
+  const confirmation = document.getElementById('confirmNewPassword').value;
+  const errorEl = document.getElementById('changePasswordError');
+  const successEl = document.getElementById('changePasswordSuccess');
+  const submitButton = this.querySelector('button[type="submit"]');
+  errorEl.textContent = '';
+  successEl.textContent = '';
+  if (newPassword.length < 8) { errorEl.textContent = 'The new password must be at least 8 characters.'; return; }
+  if (newPassword !== confirmation) { errorEl.textContent = 'The new passwords do not match.'; return; }
+  if (newPassword === currentPassword) { errorEl.textContent = 'Choose a password different from your current password.'; return; }
+  setButtonLoading(submitButton, true);
+  try {
+    const { data: sessionData, error: sessionError } = await sb.auth.getSession();
+    if (sessionError || !sessionData.session?.user?.email) throw sessionError || new Error('Your session has expired. Please sign in again.');
+    const { error: reauthError } = await sb.auth.signInWithPassword({ email: sessionData.session.user.email, password: currentPassword });
+    if (reauthError) throw new Error('Your current password is incorrect.');
+    const { error: updateError } = await sb.auth.updateUser({ password: newPassword });
+    if (updateError) throw updateError;
+    this.reset();
+    successEl.textContent = 'Password updated successfully.';
+  } catch (error) {
+    errorEl.textContent = error.message || 'Password could not be updated. Please try again.';
+  } finally {
+    setButtonLoading(submitButton, false);
+  }
+});
 
 async function enforceCurrentAccountStatus() {
   const {data:sessionData}=await sb.auth.getSession();

@@ -81,14 +81,6 @@
         <div class="app-bar-logo">PT</div>
         <span id="appBarTitle">Precious Tots Academy</span>
       </div>
-      <div class="app-bar-actions">
-        <button class="icon-btn" id="loginTrigger" aria-label="Login">
-          <i class="bi bi-person-circle"></i>
-        </button>
-        <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">
-          <i class="bi bi-moon"></i>
-        </button>
-      </div>
     </header>
 
     <!-- ===== Home Page ===== -->
@@ -379,9 +371,24 @@
       <form id="chatForm" class="chat-compose"><textarea id="chatInput" class="form-input" rows="2" maxlength="1000" placeholder="Type a message…" required></textarea><button class="auth-btn" type="submit"><i class="bi bi-send"></i> Send</button></form>
     </div>
 
-    <div class="page" id="page-account">
-      <h2 class="section-title"><i class="bi bi-person-gear"></i> Account &amp; Legal</h2><p class="section-subtitle">Manage your account and review PTA policies</p>
+    <div class="page" id="page-settings">
+      <h2 class="section-title"><i class="bi bi-gear"></i> Settings</h2><p class="section-subtitle">Appearance, account security, and legal information</p>
+      <div class="card-glass settings-list">
+        <button type="button" class="settings-row" id="themeToggle"><span><i class="bi bi-moon"></i><strong id="themeToggleLabel">Use dark mode</strong></span><i class="bi bi-chevron-right"></i></button>
+      </div>
+      <div class="card-glass settings-card">
+        <h3><i class="bi bi-key"></i> Change password</h3>
+        <form id="changePasswordForm">
+          <div class="form-group"><label class="form-label" for="currentPassword">Current password</label><input type="password" class="form-input" id="currentPassword" autocomplete="current-password" required></div>
+          <div class="form-group"><label class="form-label" for="newPassword">New password</label><input type="password" class="form-input" id="newPassword" autocomplete="new-password" minlength="8" required></div>
+          <div class="form-group"><label class="form-label" for="confirmNewPassword">Confirm new password</label><input type="password" class="form-input" id="confirmNewPassword" autocomplete="new-password" minlength="8" required></div>
+          <div class="form-error" id="changePasswordError" role="alert"></div><div class="form-success" id="changePasswordSuccess" role="status"></div>
+          <button type="submit" class="auth-btn"><span class="btn-text">Update password</span><div class="spinner-border spinner-border-sm" role="status"><span class="visually-hidden">Loading...</span></div></button>
+        </form>
+      </div>
+      <h3 class="settings-heading">Account &amp; Legal</h3>
       <div class="card-glass legal-menu"><a href="legal/privacy.html" target="_blank"><i class="bi bi-shield-check"></i> Privacy Policy</a><a href="legal/terms.html" target="_blank"><i class="bi bi-file-text"></i> Terms of Use</a><a href="legal/community-guidelines.html" target="_blank"><i class="bi bi-people"></i> Community Guidelines</a><a href="legal/delete-account.html" target="_blank"><i class="bi bi-info-circle"></i> Account deletion information</a></div>
+      <div class="card-glass settings-account"><button type="button" class="settings-signout" id="settingsSignOut"><i class="bi bi-box-arrow-right"></i> Sign out</button><div class="settings-identity"><strong id="settingsUserName">Signed-in member</strong><span id="settingsUserEmail"></span></div></div>
       <div class="card-glass danger-zone"><h3>Delete account</h3><p>Access will be revoked immediately. Your account is scheduled for permanent deletion after 14 days. Chat history is anonymized; owned uploads are deleted. Minimal safety records may be retained as described in the Privacy Policy.</p><button type="button" class="danger-btn" id="deleteAccountBtn"><i class="bi bi-trash3"></i> Request account deletion</button></div>
     </div>
 
@@ -422,7 +429,7 @@
   </div><!-- /app-shell -->
 
   <div class="menu-overlay protected-app" id="menuOverlay" style="display:none;"></div>
-  <aside class="side-menu protected-app" id="sideMenu" style="display:none;"><div class="side-menu-header"><strong>PTA Menu</strong><button class="icon-btn" id="menuClose"><i class="bi bi-x-lg"></i></button></div><button class="menu-item" data-menu-page="page-gallery"><i class="bi bi-megaphone"></i> Noticeboard</button><button class="menu-item" data-menu-page="page-chat"><i class="bi bi-chat-dots"></i> Chatroom</button><button class="menu-item" data-menu-page="page-account"><i class="bi bi-person-gear"></i> Account &amp; Legal</button></aside>
+  <aside class="side-menu protected-app" id="sideMenu" style="display:none;"><div class="side-menu-header"><strong>PTA Menu</strong><button class="icon-btn" id="menuClose"><i class="bi bi-x-lg"></i></button></div><button class="menu-item" data-menu-page="page-gallery"><i class="bi bi-megaphone"></i> Noticeboard</button><button class="menu-item" data-menu-page="page-chat"><i class="bi bi-chat-dots"></i> Chatroom</button><button class="menu-item" data-menu-page="page-settings"><i class="bi bi-gear"></i> Settings</button></aside>
 
   <!-- ===== Biometric Lock Screen ===== -->
   <div id="biometricLock" class="biometric-lock">
