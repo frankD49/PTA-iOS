@@ -1,0 +1,39 @@
+{
+  "name": "PTA — Precious Tots Academy",
+  "short_name": "PTA",
+  "description": "Where learning meets imagination. Precious Tots Academy — a joyful, creative space where every child's potential shines.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f8f9fa",
+  "theme_color": "#388E3C",
+  "categories": ["education", "kids", "school"],
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='112' fill='%23388E3C'/><text x='256' y='340' font-size='280' text-anchor='middle' fill='white' font-family='Arial,sans-serif' font-weight='bold'>PT</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='112' fill='%23388E3C'/><text x='256' y='340' font-size='280' text-anchor='middle' fill='white' font-family='Arial,sans-serif' font-weight='bold'>PT</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='42' fill='%23388E3C'/><text x='96' y='128' font-size='105' text-anchor='middle' fill='white' font-family='Arial,sans-serif' font-weight='bold'>PT</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='42' fill='%23388E3C'/><text x='96' y='128' font-size='105' text-anchor='middle' fill='white' font-family='Arial,sans-serif' font-weight='bold'>PT</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

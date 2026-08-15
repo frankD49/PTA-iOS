@@ -1,0 +1,30 @@
+{
+  "name": "pta-app-ios",
+  "version": "1.0.0",
+  "description": "Precious Tots Academy — iOS standalone",
+  "author": "Great Pam",
+  "license": "MIT",
+  "scripts": {
+    "build": "cp index.html styles.css app.js manifest.json sw.js supabase-config.js www/ && cp -R legal www/",
+    "sync": "npx cap sync ios",
+    "open": "npx cap open ios",
+    "run": "npx cap run ios",
+    "icons": "python3 generate-icons.py"
+  },
+  "dependencies": {
+    "@aparajita/capacitor-biometric-auth": "^10.0.0",
+    "@capacitor/app": "^8.1.1",
+    "@capacitor/camera": "^8.2.2",
+    "@capacitor/cli": "^8.5.0",
+    "@capacitor/core": "^8.5.0",
+    "@capacitor/filesystem": "^8.1.2",
+    "@capacitor/haptics": "^8.0.2",
+    "@capacitor/ios": "^8.5.0",
+    "@capacitor/splash-screen": "^8.0.2",
+    "@capacitor/status-bar": "^8.0.3",
+    "@supabase/supabase-js": "^2.112.1"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5"
+  }
+}

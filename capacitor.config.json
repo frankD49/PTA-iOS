@@ -1,0 +1,26 @@
+{
+  "appId": "com.precioustotsacademy.pta",
+  "appName": "PTA",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "backgroundColor": "#388E3C"
+  },
+  "ios": {
+    "backgroundColor": "#388E3C"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1200,
+      "backgroundColor": "#388E3C",
+      "showSpinner": false,
+      "androidScaleType": "CENTER_CROP"
+    },
+    "StatusBar": {
+      "style": "DARK",
+      "backgroundColor": "#388E3C"
+    }
+  }
+}

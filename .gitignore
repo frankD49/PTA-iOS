@@ -1,0 +1,23 @@
+node_modules/
+.DS_Store
+www/
+
+# Local Supabase project/link state
+supabase/.temp/
+
+# Xcode local/build state
+DerivedData/
+build/
+ios/App/DerivedData/
+ios/App/xcuserdata/
+ios/App/*.xcworkspace/xcuserdata/
+ios/App/App.xcodeproj/xcuserdata/
+*.xcuserstate
+
+# Secrets and signing material
+*.p12
+*.mobileprovision
+*.cer
+*.key
+*.keystore
+*.jks

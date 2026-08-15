@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="PTA" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#388E3C" />
+  <meta name="description" content="Precious Tots Academy — Where learning meets imagination." />
+  <title>PTA — Precious Tots Academy</title>
+
+  <link rel="manifest" href="./manifest.json" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%23388E3C%22/><text x=%2250%22 y=%2268%22 font-size=%2255%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Arial%22 font-weight=%22bold%22>PT</text></svg>" />
+
+  <!-- Apple touch icon -->
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%23388E3C%22/><text x=%2250%22 y=%2268%22 font-size=%2255%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Arial%22 font-weight=%22bold%22>PT</text></svg>" />
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- App Styles -->
+  <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body data-theme="light">
+
+  <!-- ===== Splash Screen ===== -->
+  <div class="splash" id="splash">
+    <div class="splash-logo">PT</div>
+    <div class="splash-text">Precious Tots Academy</div>
+    <div class="splash-subtext">Where learning meets imagination</div>
+  </div>
+
+  <!-- ===== Authentication Landing ===== -->
+  <main class="auth-landing" id="authLanding" aria-label="Account access">
+    <div class="auth-landing-glow auth-glow-one"></div><div class="auth-landing-glow auth-glow-two"></div>
+    <section class="auth-card">
+      <div class="auth-brand"><div class="auth-brand-logo">PT</div><div><h1>Precious Tots Academy</h1><p>Where learning meets imagination</p></div></div>
+      <div class="auth-tabs" role="tablist" aria-label="Account options"><button type="button" class="auth-tab active" data-auth-panel="signupPanel">Create account</button><button type="button" class="auth-tab" data-auth-panel="loginPanel">Log in</button></div>
+      <div class="auth-panel active" id="signupPanel">
+        <h2>Create your account</h2><p class="auth-intro">Submit your details and an administrator will review your request and provide an invite code.</p><div class="auth-alerts"></div>
+        <form id="landingSignupForm">
+          <div class="form-group"><label class="form-label" for="fullName">Name</label><input type="text" class="form-input" id="fullName" placeholder="Enter your full name" autocomplete="name" required></div>
+          <div class="form-group"><label class="form-label" for="landingSignupEmail">Email</label><input type="email" class="form-input" id="landingSignupEmail" placeholder="Enter your email" autocomplete="email" required></div>
+          <div class="form-group"><label class="form-label" for="landingSignupPassword">Password</label><input type="password" class="form-input" id="landingSignupPassword" placeholder="Create a password" autocomplete="new-password" minlength="6" required></div>
+          <div class="form-group"><label class="form-label" for="landingConfirmPassword">Confirm password</label><input type="password" class="form-input" id="landingConfirmPassword" placeholder="Repeat your password" autocomplete="new-password" minlength="6" required></div>
+          <button type="submit" class="auth-btn"><span class="btn-text">Request invite code</span><div class="spinner-border spinner-border-sm" role="status"><span class="visually-hidden">Loading...</span></div></button>
+          <p class="legal-links">By requesting an account you acknowledge our <a href="legal/privacy.html" target="_blank">Privacy Policy</a>. You will accept the <a href="legal/terms.html" target="_blank">Terms</a> and <a href="legal/community-guidelines.html" target="_blank">Community Guidelines</a> before posting.</p>
+        </form>
+      </div>
+      <div class="auth-panel" id="loginPanel">
+        <h2>Welcome back</h2><p class="auth-intro">Enter the invite code supplied by the administrator to continue.</p><div class="auth-alerts"></div>
+        <form id="landingLoginForm">
+          <div class="form-group"><label class="form-label" for="landingLoginEmail">Email</label><input type="email" class="form-input" id="landingLoginEmail" placeholder="Enter your email" autocomplete="email" required></div>
+          <div class="form-group"><label class="form-label" for="landingLoginPassword">Password</label><input type="password" class="form-input" id="landingLoginPassword" placeholder="Enter your password" autocomplete="current-password" required></div>
+          <div class="form-group"><label class="form-label" for="loginInviteCode">Invite code</label><input type="text" class="form-input invite-code-input" id="loginInviteCode" placeholder="Not required for administrators" autocomplete="one-time-code" autocapitalize="characters"></div>
+          <div class="auth-form-links"><a href="#" class="auth-link" data-sheet="forgotSheet">Forgot password?</a></div>
+          <button type="submit" class="auth-btn"><span class="btn-text">Log in</span><div class="spinner-border spinner-border-sm" role="status"><span class="visually-hidden">Loading...</span></div></button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== App Shell ===== -->
+  <div class="app-shell protected-app" style="display:none;">
+
+    <!-- ===== Top App Bar ===== -->
+    <header class="app-bar">
+      <button class="icon-btn" id="menuToggle" aria-label="Open menu"><i class="bi bi-list"></i></button>
+      <div class="app-bar-title">
+        <div class="app-bar-logo">PT</div>
+        <span id="appBarTitle">Precious Tots Academy</span>
+      </div>
+      <div class="app-bar-actions">
+        <button class="icon-btn" id="loginTrigger" aria-label="Login">
+          <i class="bi bi-person-circle"></i>
+        </button>
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">
+          <i class="bi bi-moon"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- ===== Home Page ===== -->
+    <div class="page active" id="page-home">
+
+      <!-- Hero -->
+      <section class="hero-section">
+        <div class="floating-shape shape1"></div>
+        <div class="floating-shape shape2"></div>
+        <div class="floating-shape shape3"></div>
+        <div style="position: relative; z-index: 10;">
+          <h1>Where Learning Meets Imagination <i class="bi bi-stars"></i></h1>
+          <p>Welcome to Precious Tots Academy — a joyful, creative space where every child's potential shines.</p>
+          <button class="cta-btn" onclick="switchPage('page-programs')">
+            <i class="bi bi-mortarboard"></i> Explore Programs
+          </button>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section style="padding: 8px 0;">
+        <h2 class="section-title scroll-animate">About Us</h2>
+        <p class="section-subtitle scroll-animate">A joyful place where every child grows with love, curiosity, and creativity <i class="bi bi-rainbow"></i></p>
+
+        <div class="card-glass scroll-animate">
+          <p style="font-size: 0.9rem; line-height: 1.55; margin: 0; opacity: 0.85;">
+            At Precious Tots Academy, we believe every child deserves a nurturing environment
+            where imagination blossoms and learning feels like play. Our experienced teachers
+            inspire confidence, curiosity, and kindness through hands-on activities and joyful exploration.
+          </p>
+          <div class="stat-row">
+            <div class="stat-card">
+              <h3>10+</h3>
+              <p>Years Experience</p>
+            </div>
+            <div class="stat-card">
+              <h3>200+</h3>
+              <p>Happy Students</p>
+            </div>
+            <div class="stat-card">
+              <h3>15:1</h3>
+              <p>Student–Teacher</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why Choose Us -->
+      <section style="padding: 8px 0;">
+        <h2 class="section-title scroll-animate">Why Choose Us</h2>
+        <p class="section-subtitle scroll-animate">Building a foundation of love, learning, and trust</p>
+
+        <div class="values-grid">
+          <div class="value-card scroll-animate">
+            <div class="program-icon"><i class="bi bi-heart"></i></div>
+            <h3>Caring Teachers</h3>
+            <p>Passionate educators nurture every child with patience and warmth.</p>
+          </div>
+          <div class="value-card scroll-animate">
+            <div class="program-icon"><i class="bi bi-shield-check"></i></div>
+            <h3>Safe Environment</h3>
+            <p>A clean, secure, and happy space for children to explore.</p>
+          </div>
+          <div class="value-card scroll-animate">
+            <div class="program-icon"><i class="bi bi-book"></i></div>
+            <h3>Creative Curriculum</h3>
+            <p>Playful, hands-on activities that inspire curiosity.</p>
+          </div>
+          <div class="value-card scroll-animate">
+            <div class="program-icon"><i class="bi bi-people"></i></div>
+            <h3>Parent Partnership</h3>
+            <p>We grow together with families through open communication.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials Preview -->
+      <section style="padding: 8px 0;">
+        <h2 class="section-title scroll-animate">Parent Voices</h2>
+        <p class="section-subtitle scroll-animate">Hear what our happy families have to say</p>
+
+        <div class="testimonial-card scroll-animate">
+          <div class="testimonial-avatar"><i class="bi bi-person-circle"></i></div>
+          <blockquote>"My daughter absolutely loves her teachers! I've seen her confidence grow every week."</blockquote>
+          <h4>— Mrs. Edimoh</h4>
+        </div>
+        <div class="testimonial-card scroll-animate">
+          <div class="testimonial-avatar"><i class="bi bi-person-circle"></i></div>
+          <blockquote>"Such a joyful, creative atmosphere. The staff truly care about each child's growth."</blockquote>
+          <h4>— Mr. Naphtali Z.</h4>
+        </div>
+        <div class="testimonial-card scroll-animate">
+          <div class="testimonial-avatar"><i class="bi bi-person-circle"></i></div>
+          <blockquote>"We're so grateful for the safe, loving environment Precious Tots provides."</blockquote>
+          <h4>— Mrs. Tayo B.</h4>
+        </div>
+      </section>
+    </div>
+
+    <!-- ===== Programs Page ===== -->
+    <div class="page" id="page-programs">
+      <h2 class="section-title scroll-animate">Our Programs</h2>
+      <p class="section-subtitle scroll-animate">Nurturing young minds through every stage of growth</p>
+
+      <div class="program-grid">
+        <div class="program-card scroll-animate" data-program="creche">
+          <div class="program-icon"><i class="bi bi-balloon-heart"></i></div>
+          <h3>Crèche</h3>
+          <p>Early care with gentle play-based introduction to learning.</p>
+        </div>
+        <div class="program-card scroll-animate" data-program="reception">
+          <div class="program-icon"><i class="bi bi-palette"></i></div>
+          <h3>Reception</h3>
+          <p>Foundation for early learning through creative exploration.</p>
+        </div>
+        <div class="program-card scroll-animate" data-program="kg1">
+          <div class="program-icon"><i class="bi bi-pencil"></i></div>
+          <h3>KG 1</h3>
+          <p>Building essential skills through structured play.</p>
+        </div>
+        <div class="program-card scroll-animate" data-program="kg2">
+          <div class="program-icon"><i class="bi bi-book"></i></div>
+          <h3>KG 2</h3>
+          <p>Advanced kindergarten preparing children for primary.</p>
+        </div>
+        <div class="program-card scroll-animate" data-program="preparatory">
+          <div class="program-icon"><i class="bi bi-gear"></i></div>
+          <h3>Preparatory</h3>
+          <p>Comprehensive preparation for primary school.</p>
+        </div>
+        <div class="program-card scroll-animate" data-program="grade1">
+          <div class="program-icon"><i class="bi bi-1-circle"></i></div>
+          <h3>Grade 1</h3>
+          <p>Foundational literacy and numeracy focus.</p>
+        </div>
+        <div class="program-card scroll-animate" data-program="grade2">
+          <div class="program-icon"><i class="bi bi-2-circle"></i></div>
+          <h3>Grade 2</h3>
+          <p>Building on core academic skills.</p>
+        </div>
+        <div class="program-card scroll-animate" data-program="grade3">
+          <div class="program-icon"><i class="bi bi-3-circle"></i></div>
+          <h3>Grade 3</h3>
+          <p>Expanded subject knowledge and concepts.</p>
+        </div>
+        <div class="program-card scroll-animate" data-program="grade4">
+          <div class="program-icon"><i class="bi bi-4-circle"></i></div>
+          <h3>Grade 4</h3>
+          <p>Independent learning skills development.</p>
+        </div>
+        <div class="program-card scroll-animate" data-program="grade5">
+          <div class="program-icon"><i class="bi bi-5-circle"></i></div>
+          <h3>Grade 5</h3>
+          <p>Preparing students for secondary education.</p>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 20px;">
+        <button class="cta-btn" id="signupTrigger">
+          <i class="bi bi-mortarboard"></i> Enroll Now
+        </button>
+      </div>
+    </div>
+
+    <!-- ===== Gallery Page ===== -->
+    <div class="page" id="page-gallery">
+      <h2 class="section-title scroll-animate">Noticeboard</h2>
+      <p class="section-subtitle scroll-animate">School photos, documents, videos and announcements</p>
+
+      <!-- Upload Section (visible when logged in) -->
+      <div id="uploadSection" style="display:none;">
+        <div class="card-glass scroll-animate" style="margin-top: 20px;">
+          <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 12px; text-align: center;">
+            <i class="bi bi-cloud-arrow-up" style="color: var(--primary-green);"></i> Upload Media
+          </h3>
+          <p style="font-size: 0.8rem; opacity: 0.6; text-align: center; margin-bottom: 16px;">
+            Share photos, documents, and videos
+          </p>
+
+          <div id="uploadAlerts"></div>
+
+          <div class="upload-btn-row">
+            <button class="upload-btn" id="cameraBtn">
+              <i class="bi bi-camera"></i>
+              <span>Camera</span>
+            </button>
+            <button class="upload-btn" onclick="document.getElementById('photoInput').click()">
+              <i class="bi bi-image"></i>
+              <span>Photo</span>
+            </button>
+            <button class="upload-btn" onclick="document.getElementById('pdfInput').click()">
+              <i class="bi bi-file-earmark-pdf"></i>
+              <span>PDF</span>
+            </button>
+            <button class="upload-btn" onclick="document.getElementById('videoInput').click()">
+              <i class="bi bi-camera-reels"></i>
+              <span>Video</span>
+            </button>
+          </div>
+
+          <div id="uploadProgress" style="display:none; text-align:center; padding:12px; font-size:0.8rem; color:var(--primary-green); font-weight:500;"></div>
+
+          <!-- Hidden file inputs -->
+          <input type="file" id="photoInput" accept="image/png,image/jpeg,image/gif,image/webp,image/heic,image/heif" style="display:none;">
+          <input type="file" id="pdfInput" accept="application/pdf,.pdf" style="display:none;">
+          <input type="file" id="videoInput" accept="video/mp4,video/quicktime,video/x-msvideo,video/x-matroska,video/webm" style="display:none;">
+        </div>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item scroll-animate">
+          <i class="bi bi-brush gallery-icon"></i>
+          <h4>Art Class</h4>
+          <p>Creative expression through painting and crafts</p>
+        </div>
+        <div class="gallery-item scroll-animate">
+          <i class="bi bi-book-half gallery-icon"></i>
+          <h4>Story Time</h4>
+          <p>Immersive storytelling sessions</p>
+        </div>
+        <div class="gallery-item scroll-animate">
+          <i class="bi bi-tree gallery-icon"></i>
+          <h4>Outdoor Play</h4>
+          <p>Safe, fun playground activities</p>
+        </div>
+        <div class="gallery-item scroll-animate">
+          <i class="bi bi-music-note-beamed gallery-icon"></i>
+          <h4>Music & Movement</h4>
+          <p>Rhythm and coordination development</p>
+        </div>
+        <div class="gallery-item scroll-animate">
+          <i class="bi bi-puzzle gallery-icon"></i>
+          <h4>Learning Centers</h4>
+          <p>Interactive educational stations</p>
+        </div>
+        <div class="gallery-item scroll-animate">
+          <i class="bi bi-emoji-smile gallery-icon"></i>
+          <h4>Happy Faces</h4>
+          <p>Joyful moments throughout the day</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Contact Page ===== -->
+    <div class="page" id="page-contact">
+      <h2 class="section-title scroll-animate">Get in Touch <i class="bi bi-flower1"></i></h2>
+      <p class="section-subtitle scroll-animate">"Where learning blossoms and thrive."</p>
+
+      <div class="card-glass scroll-animate">
+        <div class="contact-item">
+          <i class="bi bi-geo-alt"></i>
+          <span>Road 2 (Nung Inyang Ekpo) Off Pepsi Junction,<br>Idoro Road, Uyo, Akwa Ibom State, Nigeria.</span>
+        </div>
+        <div class="contact-item">
+          <i class="bi bi-telephone"></i>
+          <a href="tel:+2348109778397">+234 810 977 8397</a>
+        </div>
+        <div class="contact-item">
+          <i class="bi bi-envelope"></i>
+          <a href="mailto:precioustotsacademy@outlook.com">precioustotsacademy@outlook.com</a>
+        </div>
+        <div style="margin-top: 16px;">
+          <a href="https://wa.me/2348109778397" target="_blank" class="cta-btn" style="text-decoration: none;">
+            <i class="bi bi-whatsapp"></i> Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="card-glass scroll-animate" style="padding: 0; overflow: hidden;">
+        <div class="map-container" style="margin: 0; border: none; height: 220px;">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.191570515006!2d7.950000!3d4.950000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNMKwNTcnMDAuMCJOIDfCsDU3JzAwLjAiRQ!5e0!3m2!1sen!2sng!4v1620000000000!5m2!1sen!2sng"
+            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+
+      <div style="text-align: center; padding: 24px 0 8px; font-size: 0.75rem; opacity: 0.5;">
+        &copy; <script>document.write(new Date().getFullYear())</script> Precious Tots Academy<br>
+        Built by <a href="https://wa.link/pf0gjq" target="_blank" style="color: var(--primary-green); text-decoration: none;">Great Pam</a>
+      </div>
+    </div>
+
+    <div class="page" id="page-chat">
+      <h2 class="section-title"><i class="bi bi-chat-dots"></i> Chatroom</h2><p class="section-subtitle">PTA community group chat</p>
+      <div id="chatMessages" class="chat-messages"><div class="chat-empty">Loading messages…</div></div>
+      <form id="chatForm" class="chat-compose"><textarea id="chatInput" class="form-input" rows="2" maxlength="1000" placeholder="Type a message…" required></textarea><button class="auth-btn" type="submit"><i class="bi bi-send"></i> Send</button></form>
+    </div>
+
+    <div class="page" id="page-account">
+      <h2 class="section-title"><i class="bi bi-person-gear"></i> Account &amp; Legal</h2><p class="section-subtitle">Manage your account and review PTA policies</p>
+      <div class="card-glass legal-menu"><a href="legal/privacy.html" target="_blank"><i class="bi bi-shield-check"></i> Privacy Policy</a><a href="legal/terms.html" target="_blank"><i class="bi bi-file-text"></i> Terms of Use</a><a href="legal/community-guidelines.html" target="_blank"><i class="bi bi-people"></i> Community Guidelines</a><a href="legal/delete-account.html" target="_blank"><i class="bi bi-info-circle"></i> Account deletion information</a></div>
+      <div class="card-glass danger-zone"><h3>Delete account</h3><p>Access will be revoked immediately. Your account is scheduled for permanent deletion after 14 days. Chat history is anonymized; owned uploads are deleted. Minimal safety records may be retained as described in the Privacy Policy.</p><button type="button" class="danger-btn" id="deleteAccountBtn"><i class="bi bi-trash3"></i> Request account deletion</button></div>
+    </div>
+
+    <!-- ===== Admin Page (hidden, shown for admins only) ===== -->
+    <div class="page" id="page-admin">
+      <h2 class="section-title scroll-animate"><i class="bi bi-shield-lock"></i> Admin Panel</h2>
+      <p class="section-subtitle scroll-animate">Review account requests and manage members</p>
+
+      <div id="adminAlerts"></div>
+
+      <!-- Account Requests -->
+      <div class="card-glass scroll-animate">
+        <div class="admin-section-heading"><h3><i class="bi bi-person-check"></i> Account requests</h3><span class="admin-count" id="adminRequestCount">0</span></div>
+        <p class="admin-section-help">Generate an access code for a requester, then share it with them.</p>
+        <div id="adminRequestLoading" class="admin-loading"><div class="spinner-border spinner-border-sm" role="status"></div> Loading requests...</div>
+        <div id="adminRequestList"></div>
+      </div>
+
+      <!-- Member List -->
+      <div class="card-glass scroll-animate" style="margin-top: 12px;">
+        <div class="admin-section-heading"><h3><i class="bi bi-people"></i> Members</h3><span class="admin-count" id="adminMemberCount">0</span></div>
+        <div id="adminLoading" class="admin-loading">
+          <div class="spinner-border spinner-border-sm" role="status"></div> Loading members...
+        </div>
+        <div id="adminMemberList"></div>
+      </div>
+
+      <div class="card-glass scroll-animate" style="margin-top: 12px;">
+        <div class="admin-section-heading"><h3><i class="bi bi-shield-check"></i> Administrators</h3><span class="admin-count" id="adminAdminCount">0</span></div>
+        <p class="admin-section-help">Administrators can review requests, generate codes, and manage members.</p>
+        <div id="adminAdminList"></div>
+      </div>
+
+      <div class="card-glass scroll-animate" style="margin-top: 12px;"><div class="admin-section-heading"><h3><i class="bi bi-flag"></i> Reports</h3><span class="admin-count" id="adminReportCount">0</span></div><p class="admin-section-help">Review within 48 hours. Escalate child-safety concerns immediately to the safeguarding lead.</p><div id="adminReportList"><p class="admin-loading">Loading reports...</p></div></div>
+
+    </div>
+
+  </div><!-- /app-shell -->
+
+  <div class="menu-overlay protected-app" id="menuOverlay" style="display:none;"></div>
+  <aside class="side-menu protected-app" id="sideMenu" style="display:none;"><div class="side-menu-header"><strong>PTA Menu</strong><button class="icon-btn" id="menuClose"><i class="bi bi-x-lg"></i></button></div><button class="menu-item" data-menu-page="page-gallery"><i class="bi bi-megaphone"></i> Noticeboard</button><button class="menu-item" data-menu-page="page-chat"><i class="bi bi-chat-dots"></i> Chatroom</button><button class="menu-item" data-menu-page="page-account"><i class="bi bi-person-gear"></i> Account &amp; Legal</button></aside>
+
+  <!-- ===== Biometric Lock Screen ===== -->
+  <div id="biometricLock" class="biometric-lock">
+    <div class="biometric-lock-content">
+      <i class="bi bi-fingerprint biometric-lock-icon"></i>
+      <h3>Authenticate</h3>
+      <p id="biometricMsg">Use your fingerprint or screen lock to access PTA</p>
+      <button class="auth-btn" id="biometricUnlockBtn">
+        <span class="btn-text">Unlock</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="consentGate" class="compliance-overlay" role="dialog" aria-modal="true" aria-labelledby="consentTitle"><div class="compliance-dialog"><h3 id="consentTitle">Before you continue</h3><p>Review and accept the current PTA Terms of Use and Community Guidelines. Acceptance is recorded with the document version and time.</p><div class="guideline-summary"><strong>Community safety</strong><span>No harassment, threats, hate, sexual or exploitative content, spam, impersonation, illegal content, unauthorized school disclosures, or sharing children’s information/images without authorization. Content may be removed and accounts suspended.</span></div><div class="legal-links"><a href="legal/terms.html" target="_blank">Terms of Use</a> · <a href="legal/privacy.html" target="_blank">Privacy Policy</a> · <a href="legal/community-guidelines.html" target="_blank">Community Guidelines</a></div><label class="consent-check"><input type="checkbox" id="consentCheckbox"> <span>I have read and agree to the Terms of Use and Community Guidelines.</span></label><div id="consentError" class="form-error"></div><button type="button" class="auth-btn" id="acceptLegalBtn">Accept and continue</button></div></div>
+  <div id="reportSheet" class="compliance-overlay" role="dialog" aria-modal="true" aria-labelledby="reportTitle"><form class="compliance-dialog" id="reportForm"><h3 id="reportTitle">Report</h3><p id="reportTargetText"></p><label class="form-label" for="reportReason">Reason</label><select class="form-input" id="reportReason" required><option value="">Select a reason</option><option value="harassment">Harassment, bullying, threats or hate</option><option value="sexual_content">Sexual or exploitative content</option><option value="child_safety">Child safety or unauthorized child information</option><option value="privacy">Privacy violation</option><option value="spam_impersonation">Spam or impersonation</option><option value="illegal_content">Illegal content</option><option value="school_confidentiality">Unauthorized school information</option><option value="other">Other</option></select><label class="form-label" for="reportDetails">Details (optional)</label><textarea class="form-input" id="reportDetails" maxlength="2000" rows="4"></textarea><div class="dialog-actions"><button type="button" class="secondary-btn" id="cancelReportBtn">Cancel</button><button type="submit" class="auth-btn">Submit report</button></div></form></div>
+
+  <!-- ===== Bottom Tab Navigation ===== -->
+  <nav class="bottom-nav protected-app" style="display:none;">
+    <a href="#" class="tab-item active" data-page="page-home">
+      <i class="bi bi-house-door"></i>
+      <span>Home</span>
+    </a>
+    <a href="#" class="tab-item" data-page="page-programs">
+      <i class="bi bi-mortarboard"></i>
+      <span>Programs</span>
+    </a>
+    <a href="#" class="tab-item" data-page="page-gallery">
+      <i class="bi bi-images"></i>
+      <span>Gallery</span>
+    </a>
+    <a href="#" class="tab-item" data-page="page-contact">
+      <i class="bi bi-chat-dots"></i>
+      <span>Contact</span>
+    </a>
+    <a href="#" class="tab-item" id="adminTab" data-page="page-admin" style="display:none;">
+      <i class="bi bi-shield-lock"></i>
+      <span>Admin</span>
+    </a>
+  </nav>
+
+  <!-- ===== Sheet Overlay ===== -->
+  <div class="sheet-overlay" id="sheetOverlay"></div>
+
+  <!-- ===== Login Sheet ===== -->
+  <div class="bottom-sheet" id="loginSheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-content">
+      <div class="sheet-icon"><i class="bi bi-person-check"></i></div>
+      <h3 class="sheet-title">Login to Your Account</h3>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label class="form-label" for="loginEmail">Email Address</label>
+          <input type="email" class="form-input" id="loginEmail" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="loginPassword">Password</label>
+          <input type="password" class="form-input" id="loginPassword" placeholder="Enter your password" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="sheetLoginInviteCode">Access code</label>
+          <input type="text" class="form-input invite-code-input" id="sheetLoginInviteCode" placeholder="Required while awaiting approval" autocomplete="one-time-code" autocapitalize="characters">
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <input type="checkbox" id="rememberMe" style="accent-color: var(--primary-green);">
+            <label for="rememberMe" style="font-size: 0.8rem;">Remember me</label>
+          </div>
+          <a href="#" class="auth-link" data-sheet="forgotSheet">Forgot password?</a>
+        </div>
+        <button type="submit" class="auth-btn">
+          <span class="btn-text">Login</span>
+          <div class="spinner-border spinner-border-sm" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </button>
+      </form>
+
+      <div style="text-align: center; margin-top: 14px; font-size: 0.82rem;">
+        <span style="opacity: 0.6;">Don't have an account? </span>
+        <a href="#" class="auth-link" data-sheet="signupSheet">Sign up</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Signup Sheet ===== -->
+  <div class="bottom-sheet" id="signupSheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-content">
+      <div class="sheet-icon"><i class="bi bi-person-plus"></i></div>
+      <h3 class="sheet-title">Create an Account</h3>
+
+      <form id="signupForm">
+        <div style="display: flex; gap: 12px;">
+          <div class="form-group" style="flex: 1;">
+            <label class="form-label" for="firstName">First Name</label>
+            <input type="text" class="form-input" id="firstName" placeholder="First name" required>
+          </div>
+          <div class="form-group" style="flex: 1;">
+            <label class="form-label" for="lastName">Last Name</label>
+            <input type="text" class="form-input" id="lastName" placeholder="Last name" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="signupEmail">Email Address</label>
+          <input type="email" class="form-input" id="signupEmail" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="signupPassword">Password</label>
+          <input type="password" class="form-input" id="signupPassword" placeholder="Create a password" required>
+          <div class="form-text">Password must be at least 6 characters long</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="confirmPassword">Confirm Password</label>
+          <input type="password" class="form-input" id="confirmPassword" placeholder="Confirm your password" required>
+        </div>
+        <div class="form-group" style="display: flex; align-items: flex-start; gap: 8px;">
+          <input type="checkbox" id="agreeTerms" required style="accent-color: var(--primary-green); margin-top: 3px;">
+          <label for="agreeTerms" style="font-size: 0.8rem; line-height: 1.4;">I acknowledge the <a href="legal/privacy.html" target="_blank" class="auth-link">Privacy Policy</a>. Current Terms and Guidelines must be accepted after approval.</label>
+        </div>
+        <button type="submit" class="auth-btn">
+          <span class="btn-text">Create Account</span>
+          <div class="spinner-border spinner-border-sm" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </button>
+      </form>
+
+      <div style="text-align: center; margin-top: 14px; font-size: 0.82rem;">
+        <span style="opacity: 0.6;">Already have an account? </span>
+        <a href="#" class="auth-link" data-sheet="loginSheet">Login</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Forgot Password Sheet ===== -->
+  <div class="bottom-sheet" id="forgotSheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-content">
+      <div class="sheet-icon"><i class="bi bi-key"></i></div>
+      <h3 class="sheet-title">Reset Your Password</h3>
+      <p style="text-align: center; font-size: 0.85rem; opacity: 0.7; margin-bottom: 16px;">
+        Enter your email address and we'll send you a link to reset your password.
+      </p>
+      <form id="forgotPasswordForm">
+        <div class="form-group">
+          <label class="form-label" for="forgotEmail">Email Address</label>
+          <input type="email" class="form-input" id="forgotEmail" placeholder="Enter your email" required>
+        </div>
+        <button type="submit" class="auth-btn">
+          <span class="btn-text">Send Reset Link</span>
+          <div class="spinner-border spinner-border-sm" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </button>
+      </form>
+      <div style="text-align: center; margin-top: 14px;">
+        <a href="#" class="auth-link" data-sheet="loginSheet">Back to Login</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Program Detail Sheet ===== -->
+  <div class="bottom-sheet" id="programSheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-content">
+      <div class="sheet-icon"><i class="bi bi-info-circle"></i></div>
+      <h3 class="sheet-title" id="programDetailTitle">Class Information</h3>
+      <div class="program-detail-content">
+        <p id="programDetailBody"></p>
+      </div>
+      <button type="button" class="auth-btn" onclick="hideSheet()">Close</button>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Supabase Config -->
+  <script type="module" src="./supabase-config.js"></script>
+
+  <!-- App JS -->
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
